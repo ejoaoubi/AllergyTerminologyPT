@@ -1,0 +1,23 @@
+---
+config:
+  theme: redux-dark
+---
+sequenceDiagram
+    participant Client
+    participant API
+    participant SQLite
+    participant PostgreSQL
+    Client->>API: HTTP Request (e.g., GET /v1/allergies/search?term=...)
+    activate API
+    Note over API: Request Intercepted & Process Started
+    API->>SQLite: Query Allergy Data (e.g., SELECT * WHERE norm_... LIKE ...)
+    activate SQLite
+    SQLite-->>API: Return Allergy Data
+    deactivate SQLite
+    API->>PostgreSQL: Log Request Details (INSERT INTO request_logs...)
+    activate PostgreSQL
+    PostgreSQL-->>API: Log Commit OK
+    deactivate PostgreSQL
+    Note over API: Prepare HTTP Response
+    API-->>Client: HTTP Response (e.g., 200 OK + Allergy Data JSON)
+    deactivate API
