@@ -45,6 +45,18 @@ This application provides a RESTful API to access a catalog of clinical terminol
     *   Hibernate Community Dialects - Required for the SQLite dialect with recent Hibernate versions
 *   **Build Tool:** Apache Maven
 
+## API Flow
+
+![imagem](https://github.com/user-attachments/assets/604f45e1-984d-4209-9bee-927ffc72d4c9)
+
+**Core Interactions:**
+*   The client makes a request.
+*   The API handles it.
+*   The API queries the **SQLite** database to get the primary data (allergies).
+*   The API writes log information to the **PostgreSQL** database.
+*   The API sends the final response back to the client.
+
+
 ## Prerequisites
 
 *   **JDK 21** or higher installed.
